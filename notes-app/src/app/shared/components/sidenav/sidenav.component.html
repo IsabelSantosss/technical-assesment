@@ -1,0 +1,22 @@
+<mat-drawer-container
+      class="sidenav"
+      autosize
+>
+      <mat-drawer
+            #drawer
+            [opened]="sidenavIsOpened"
+            class="sidenav--menu"
+      >
+            <ul class="sidenav--menu--items">
+                  <li class="sidenav--menu--items--item" routerLink="notes" (click)="drawer.close()"> 
+                        <mat-icon>checklist</mat-icon>
+                        <span> My notes </span>
+                  </li>
+            </ul>
+      </mat-drawer>
+
+      <div class="sidenav--content">
+            <ng-content></ng-content>
+      </div>
+
+</mat-drawer-container>

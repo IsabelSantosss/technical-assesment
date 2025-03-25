@@ -1,0 +1,146 @@
+<section class="my-notes-page">
+      <div class="my-notes-page--header">
+            <div class="my-notes-page--header--actions">
+                  <h2>My notes</h2>
+                  <button
+                        (click)="openCreateDialog()"
+                        mat-flat-button
+                        color="accent"
+                  > <mat-icon>add</mat-icon>Create a new note </button>
+            </div>
+
+            <div class="my-notes-page--header--search">
+                  <mat-form-field appearance="outline">
+                        <mat-icon matPrefix>search</mat-icon>
+                        <input
+                              type="text"
+                              matInput
+                              placeholder="Search"
+                              [formControl]="searchControl"
+                        >
+                  </mat-form-field>
+            </div>
+      </div>
+
+      <table
+            mat-table
+            [dataSource]="(notes$ | async)!"
+            class="my-notes-page--table"
+      >
+
+            <ng-container matColumnDef="name">
+                  <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                  > Name </th>
+                  <td
+                        mat-cell
+                        *matCellDef="let item"
+                  > {{item.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="priority">
+                  <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                  > Priority </th>
+
+                  <td
+                        mat-cell
+                        *matCellDef="let item"
+                  >
+
+                        {{item.priority}}
+                  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdOn">
+                  <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                  > Created on </th>
+                  <td
+                        mat-cell
+                        *matCellDef="let item"
+                  > {{item.createdOn}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                  <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                  > Status </th>
+                  <td
+                        mat-cell
+                        *matCellDef="let item"
+                  > {{item.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                  <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                  > Actions </th>
+                  <td
+                        mat-cell
+                        *matCellDef="let item"
+                  >
+                        <button
+                              mat-icon-button
+                              [matMenuTriggerFor]="menu"
+                              [matMenuTriggerData]="{ $implicit: item }"
+                        >
+                              <mat-icon>more_vert</mat-icon>
+                        </button>
+                  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="loading">
+                  <td
+                        matFooterCell
+                        *matFooterCellDef
+                        colspan="8"
+                  >
+
+                        <div class="loading-content">
+                              <mat-icon fontSet="material-symbols-outlined">progress_activity</mat-icon>
+                        </div>
+
+                  </td>
+            </ng-container>
+
+            <tr
+                  mat-footer-row
+                  *matFooterRowDef="['loading']"
+                  [style.display]="(isLoadingNotes$ | async) ? 'table-row' : 'none'"
+            ></tr>
+            <tr
+                  mat-header-row
+                  *matHeaderRowDef="columns"
+            ></tr>
+            <tr
+                  mat-row
+                  *matRowDef="let row; columns: columns;"
+            ></tr>
+      </table>
+</section>
+
+<mat-menu
+      #menu="matMenu"
+      xPosition="before"
+      yPosition="below"
+>
+      <ng-template
+            matMenuContent
+            let-item
+      >
+            <button
+                  (click)="openUpdateDialog(item)"
+                  mat-menu-item
+            ><mat-icon>edit_note</mat-icon> Update note</button>
+            <button
+                  (click)="openDeleteANoteConfirmation(item.id, item.name)"
+                  mat-menu-item
+            ><mat-icon>delete</mat-icon> Delete note</button>
+      </ng-template>
+</mat-menu>

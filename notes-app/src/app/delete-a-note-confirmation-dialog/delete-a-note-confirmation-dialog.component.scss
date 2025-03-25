@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.delete-a-note-confirmation-dialog {
+  &--actions {
+    padding: 16px;
+    border-top: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+  }
+}

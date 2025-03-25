@@ -1,0 +1,67 @@
+<div class="create-update-a-note">
+
+      <h2
+            mat-dialog-title
+            *ngIf="data?.note?.id"
+      >
+            Update a note
+
+
+      </h2>
+      <h2
+            mat-dialog-title
+            *ngIf="!(data?.note?.id)"
+      >
+            Create a note
+      </h2>
+      <form
+            class="create-update-a-note--form"
+            [formGroup]="form"
+      >
+            <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input
+                        matInput
+                        placeholder="Insert a name"
+                        formControlName="name"
+                  >
+            </mat-form-field>
+
+            <mat-form-field>
+                  <mat-label>Priority</mat-label>
+                  <mat-select
+                        placeholder="Select priority"
+                        formControlName="priority"
+                  >
+                        <mat-option
+                              *ngFor="let op of priorityOptions"
+                              [value]="op"
+                        > {{ op }} </mat-option>
+                  </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                  <mat-label>Status</mat-label>
+                  <mat-select
+                        placeholder="Select status"
+                        formControlName="status"
+                  >
+                        <mat-option [value]="'Backlog'">Backlog</mat-option>
+                        <mat-option [value]="'Doing'">Doing</mat-option>
+                        <mat-option [value]="'Completed'">Completed</mat-option>
+                  </mat-select>
+            </mat-form-field>
+      </form>
+      <div class="create-update-a-note--actions">
+            <button
+                  mat-button
+                  matDialogClose
+            >Cancel</button>
+            <button
+                  mat-flat-button
+                  color="accent"
+                  [disabled]="form.invalid"
+                  (click)="saveNote()"
+            >Save</button>
+      </div>
+</div>

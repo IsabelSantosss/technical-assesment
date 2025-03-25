@@ -1,0 +1,35 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.my-notes-page {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+
+  &--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &--actions {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &--table {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+table mat-icon,
+mat-menu mat-icon {
+  color: gray;
+}
+
+

@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.create-update-a-note {
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+    padding: 8px 16px;
+  }
+
+  &--actions {
+      padding: 16px;
+      border-top: 1px solid gray;
+      display: flex;
+      justify-content: space-between;
+  }
+}
+
+h2 {
+  margin: 0; 
+  padding: 8px 16px;
+}
